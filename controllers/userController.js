@@ -10,6 +10,16 @@ exports.getAllUser = (req, res) => {
       return res.json({status: 500, error:err})
     }
 
-    return res.json({data:data, message:"Data is availabel!"});
+    return res.json({data:data, status:200});
+  })
+}
+
+exports.filterUser = (req, res) => {
+  User.filterUser(req, (err, data) => {
+    if(err){
+      return res.json({status:500, error: err});
+    }
+
+    return res.json({data:data, status:200})
   })
 }
