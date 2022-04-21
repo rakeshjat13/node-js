@@ -1,5 +1,3 @@
-const express = require('express');
-const router = express.Router();
 const User = require('../models/user.model');
 
 exports.getAllUser = (req, res) => {
@@ -22,4 +20,17 @@ exports.filterUser = (req, res) => {
 
     return res.json({data:data, status:200})
   })
+}
+
+exports.createUser = (req, res) => {
+    const {name,email, dept, address, password} = req.body;
+    
+    if(!name || !email || !dept || !address || !password) return res.json({status:400, message:'Bad Request'});
+
+    User.createUser(req, (err, data) => {
+      if(err) return res.json({status:500, error:err})
+
+      return res.json({status:200, data:data});
+
+    })
 }
