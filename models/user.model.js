@@ -13,8 +13,8 @@ exports.getAllUsers = (req, callback) => {
 }
 
 exports.filterUser = (req, callback) => {
-  // console.log('request', req);
-  const filter = {email, address} = req.body;
+  console.log('request', req);
+  const filter = {email, address} = req;
   console.log("email is ", filter);
   console.log("email", email);
   if(!email) callback('invalid request', null);
@@ -32,7 +32,11 @@ exports.filterUser = (req, callback) => {
 }
 
 exports.createUser = (req, callback) => {
-    
-    console.log("postData", req.body);
-    callback(null, req.body);
+    knex.insert(req.body).into('users_tbl').then((data, err)=> {
+      console.log("query data", data);
+        console.log("query err", err);
+        callback(null, data);
+    }).catch((err) => {
+      callback(err, null);
+    })
 }

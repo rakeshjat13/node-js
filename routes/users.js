@@ -7,5 +7,6 @@ const userMiddleware = require('../middleware/userMiddleware');
 router.get('/', user.getAllUser);
 router.post('/filter', user.filterUser);
 router.post('/signup', [userMiddleware.encryptPwd, user.createUser]);
+router.post('/login', user.getLogin)
 
 module.exports = router;

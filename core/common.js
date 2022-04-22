@@ -8,14 +8,8 @@ exports.genHash = async (string, callback) => {
     })
 }
 
-exports.cmprEncryString = (password, hashedPassword) => {
-    bcrypt.compare(password, hashedPassword, async function (err, isMatch) {
-        if(err){
-            return console.log('Cannot encrypt');
-        }
-        console.log("Matched", isMatch);
-        return isMatch;
-    })
+exports.cmprEncryString = (password, hashedPassword, callback) => {
+    bcrypt.compare(password, hashedPassword, callback)
 }
 
 // -------- Example -------------
